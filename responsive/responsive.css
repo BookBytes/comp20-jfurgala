@@ -23,7 +23,7 @@
     .ralphy {
         width: 250px;
 	height: 186px;
-	background:url(ralphy.gif) 0px 375px; /* 0 186 */
+	background:url(ralphy.gif) 0px -186px;
     }
 }
 
@@ -33,25 +33,25 @@
     .ralphy {
         width: 250px;
 	height: 186px;
-	background:url(ralphy.gif) 250px 186px);
+	background:url(ralphy.gif) 250px -186px;
     }
 }
 
 @media screen
   and (min-width: 601px)
   and (max-width: 800px) {
-     .ralphy {
-         width: 250px;
-	 height: 186px;
-	 background:url(ralphy.gif) 0px 373px;
-     }
+    .ralphy {
+        width: 250px;
+	height: 186px;
+	background:url(ralphy.gif) 0px -373px;
+    }
 }
 
 @media screen
-  and (max-width: 600) {
-     .ralphy {
-	 width: 250px;
-	 height: 186px;
-	 background:url(ralphy.gif) 250px 373px;
-     }
+  and (max-width: 600px) {
+    .ralphy {
+	width: 250px;
+	height: 186px;
+	background:url(ralphy.gif) 250px -373px;
+    }
 }

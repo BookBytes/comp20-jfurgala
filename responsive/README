@@ -3,9 +3,11 @@ Lab 4: Sprite Sheets and Image Splicing
 
 Juliana Furgala
 
-Status: changes image based on browser screen size; only 2/3 of images
-        changing correctly
+Status: changes image based on browser screen size; all correctly implemented
 
-Time spent: 3 hours
+Time spent: 4.5 hours
 
 Collab: None
+
+Note: The reason the last two panels weren't showing was because I had
+an extra ')' in the 3rd to last rule... :/
