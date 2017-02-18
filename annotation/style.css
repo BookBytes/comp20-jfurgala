@@ -1,0 +1,15 @@
+h1 {
+    font-family: Courier, "Lucida Console", monospace;
+    margin: auto;
+    text-align: center;
+}
+
+body {
+    background-image: url(SeeingSpots.jpg);
+    /* free to use from here: http://blog.hostbaby.com/2014/03/10-free-website-background-images-for-spring/ */
+}
+
+video {
+    display: block;
+    margin: auto;
+}
