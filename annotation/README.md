@@ -2,8 +2,8 @@ annotation
 
 Name: Juliana Furgala
 
-Status:
+Status: completed according to the spec
 
-Collab/discussion:
+Collab/discussion: N/A
 
-Time spent: 
+Time spent: 3 hours
