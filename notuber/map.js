@@ -53,6 +53,6 @@ function renderMap()
 }
 
 function init() {
-    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    map = new google.maps.Map(document.getElementById("mymap"), myOptions);
     getMyLocation();
 }
