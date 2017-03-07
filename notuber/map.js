@@ -6,6 +6,7 @@ var map;
 var marker;
 var infowindow = new google.maps.InfoWindow();
 var myOptions = { zoom: 15, center: myLoc, mapTypeId: google.maps.MapTypeId.ROADMAP };
+var data;
 
 function getMyLocation() {
     var xhr = new XMLHttpRequest();
@@ -21,7 +22,8 @@ function getMyLocation() {
             var content = "username=FACZaAp2&lat=" + mylat + "&lng=" + mylong;
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
-                    alert(xhr.responseText);
+                    data = JSON.parse(xhr.responseText);
+		    renderVehicles(data);
                 }
             }
 	          
@@ -52,6 +54,24 @@ function renderMap()
     });
 }
 
+function renderVehicles(data) {
+    for (var i = 0; i < data.length; i++) {
+        var carLoc = new google.maps.LatLng(data[i].lat, data[i].lng);
+	
+	marker = new google.maps.Marker({
+	    position: carLoc,
+	    title: data[i].username,
+	});
+    
+	marker.setMap(map);
+
+	google.maps.event.addListener(marker, 'click', function() {
+	    infowindow.setContent(marker.title);
+	    infowindow.open(map, marker);
+	});
+    }
+}
+	
 function init() {
     map = new google.maps.Map(document.getElementById("mymap"), myOptions);
     getMyLocation();
