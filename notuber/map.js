@@ -35,7 +35,7 @@ function getMyLocation() {
 
 function renderMap()
 {
-    myLoc = new google.maps.LatLng(myLat, myLng);
+    myLoc = new google.maps.LatLng(mylat, mylong);
 				
     map.panTo(myLoc);
 	
