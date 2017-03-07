@@ -1,6 +1,7 @@
 /* Largely based on/adapted from/taken from where applicable Ming's geoloc. map example */
 var mylat = 0;
 var mylong = 0;
+var req = new XMLHttpRequest();
 var myLoc;
 var map;
 var marker;
@@ -9,25 +10,25 @@ var myOptions = { zoom: 15, center: myLoc, mapTypeId: google.maps.MapTypeId.ROAD
 var data;
 
 function getMyLocation() {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://defense-in-derpth.herokuapp.com/submit", true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    req.open("POST", "https://defense-in-derpth.herokuapp.com/submit", true);
+    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             mylat = position.coords.latitude;
             mylong = position.coords.latitude;
+
 	    renderMap();
 
             var content = "username=FACZaAp2&lat=" + mylat + "&lng=" + mylong;
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    data = JSON.parse(xhr.responseText);
+            req.onreadystatechange = function() {
+                if (req.readyState == 4 && req.status == 200) {
+                    data = JSON.parse(req.responseText);
 		    renderVehicles(data);
                 }
             }
 	          
-            xhr.send(content);
+            req.send(content);
 	});
     }
     else {
@@ -38,7 +39,7 @@ function getMyLocation() {
 function renderMap()
 {
     myLoc = new google.maps.LatLng(mylat, mylong);
-				
+
     map.panTo(myLoc);
 	
     marker = new google.maps.Marker({
