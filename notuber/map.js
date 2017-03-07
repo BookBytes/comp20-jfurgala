@@ -1,3 +1,4 @@
+/* Largely based on/adapted from/taken from where applicable Ming's geoloc. map example */
 var mylat = 0;
 var mylong = 0;
 var myLoc;
