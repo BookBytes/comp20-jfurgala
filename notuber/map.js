@@ -5,7 +5,7 @@ var myLoc;
 var map;
 var marker;
 var infowindow = new google.maps.InfoWindow();
-var mtOptions = { zoom: 15, center: myLoc, mapTypeId: google.maps.MapTypeId.ROADMAP };
+var myOptions = { zoom: 15, center: myLoc, mapTypeId: google.maps.MapTypeId.ROADMAP };
 
 function getMyLocation() {
     var xhr = new XMLHttpRequest();
