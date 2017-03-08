@@ -61,7 +61,7 @@ function renderVehicles(data) {
 	
 	marker = new google.maps.Marker({
 	    position: carLoc,
-	    title: data[i].username,
+	    title: data[i].username
 	});
     
 	marker.setMap(map);
