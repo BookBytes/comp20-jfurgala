@@ -6,7 +6,7 @@ var myLoc;
 var map;
 var marker;
 var infowindow = new google.maps.InfoWindow();
-var myOptions = { zoom: 15, center: myLoc, mapTypeId: google.maps.MapTypeId.ROADMAP };
+var myOptions = { zoom: 13, center: myLoc, mapTypeId: google.maps.MapTypeId.ROADMAP };
 var data;
 
 /* from https://developers.google.com/maps/documentation/javascript/custom-markers */
@@ -21,14 +21,13 @@ var icons = {
 
 function addMarkers(data, type) {
     var mapmarker;
-    for (var i = 0; i < data.type.length; i++) {
-        var Loc = new google.maps.LatLng(data.type[i].lat, data.type[i].lng);
-        alert(data.type[i]);
-	
-        mapmarker = new.google.maps.Marker({
+    for (var i = 0; i < data[type].length; i++) {
+        var Loc = new google.maps.LatLng(data[type][i].lat, data[type][i].lng);
+
+        mapmarker = new google.maps.Marker({
 	    position: Loc,
 	    icon: icons[type].icon,
-	    title: data.type[i].username
+	    title: data[type][i].username
 	});
 
 	mapmarker.setMap(map);
@@ -43,11 +42,10 @@ function addMarkers(data, type) {
 function renderVehicles(data) {
     console.log(data);
     if (data.vehicles) {
-	alert(data.vehicles);
 	addMarkers(data, 'vehicles');
     }
     else {
-	/* addMarkers(data, 'passengers'); */
+	addMarkers(data, 'passengers');
     }
 }
 
@@ -59,7 +57,7 @@ function getMyLocation() {
         navigator.geolocation.getCurrentPosition(function(position) {
             mylat = position.coords.latitude;
             mylong = position.coords.longitude;
-            alert(mylat + " " +  mylong);
+
 	    renderMap();
 
             var content = "username=FACZaAp2&lat=" + mylat + "&lng=" + mylong;
