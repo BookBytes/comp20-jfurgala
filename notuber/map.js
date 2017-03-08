@@ -9,6 +9,48 @@ var infowindow = new google.maps.InfoWindow();
 var myOptions = { zoom: 15, center: myLoc, mapTypeId: google.maps.MapTypeId.ROADMAP };
 var data;
 
+/* from https://developers.google.com/maps/documentation/javascript/custom-markers */
+var icons = {
+    vehicles: {
+        icon: 'black_car.png'
+    },
+    passengers: {
+	icon: 'squirrel.png'
+    }
+};
+
+function addMarkers(data, type) {
+    var mapmarker;
+    for (var i = 0; i < data.type.length; i++) {
+        var Loc = new google.maps.LatLng(data.type[i].lat, data.type[i].lng);
+        alert(data.type[i]);
+	
+        mapmarker = new.google.maps.Marker({
+	    position: Loc,
+	    icon: icons[type].icon,
+	    title: data.type[i].username
+	});
+
+	mapmarker.setMap(map);
+
+	google.maps.event.addListener(mapmarker, 'click', function() {
+	    infowindow.setContent(mapmarker.title);
+	    infowindow.open(map, mapmarker);
+	});
+    }
+}
+
+function renderVehicles(data) {
+    console.log(data);
+    if (data.vehicles) {
+	alert(data.vehicles);
+	addMarkers(data, 'vehicles');
+    }
+    else {
+	/* addMarkers(data, 'passengers'); */
+    }
+}
+
 function getMyLocation() {
     req.open("POST", "https://defense-in-derpth.herokuapp.com/submit", true);
     req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -16,8 +58,8 @@ function getMyLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             mylat = position.coords.latitude;
-            mylong = position.coords.latitude;
-
+            mylong = position.coords.longitude;
+            alert(mylat + " " +  mylong);
 	    renderMap();
 
             var content = "username=FACZaAp2&lat=" + mylat + "&lng=" + mylong;
@@ -53,24 +95,6 @@ function renderMap()
 	infowindow.setContent(marker.title);
 	infowindow.open(map, marker);
     });
-}
-
-function renderVehicles(data) {
-    for (var i = 0; i < data.length; i++) {
-        var carLoc = new google.maps.LatLng(data[i].lat, data[i].lng);
-	
-	marker = new google.maps.Marker({
-	    position: carLoc,
-	    title: data[i].username
-	});
-    
-	marker.setMap(map);
-
-	google.maps.event.addListener(marker, 'click', function() {
-	    infowindow.setContent(marker.title);
-	    infowindow.open(map, marker);
-	});
-    }
 }
 	
 function init() {
