@@ -6,7 +6,7 @@ var myLoc;
 var map;
 var marker;
 var infowindow = new google.maps.InfoWindow();
-var myOptions = { zoom: 13, center: myLoc, mapTypeId: google.maps.MapTypeId.ROADMAP };
+var myOptions = { zoom: 16, center: myLoc, mapTypeId: google.maps.MapTypeId.ROADMAP };
 var data;
 
 /* from https://developers.google.com/maps/documentation/javascript/custom-markers */
@@ -19,6 +19,7 @@ var icons = {
 	icon: 'squirrel.png'
     },
     me: {
+	/* Src: http://maxpixel.freegreatpicture.com/Africa-Pachyderm-Asia-Elephant-Animal-Silhouette-1837462 */
         icon: 'africa_pachyderm.png'
     }
 };
@@ -35,6 +36,8 @@ function addMarkers(data, type) {
 	    title: data[type][i].username
 	});
 
+	mapmarker.title += '<p>' + (google.maps.geometry.spherical.computeDistanceBetween(myLoc, Loc) * 0.000621371) + ' miles away</p>'
+	
 	mapmarker.setMap(map);
 
 	google.maps.event.addListener(mapmarker, 'click', function() {
