@@ -2,6 +2,6 @@ README
 
 Name: Juliana Furgala
 
-Collab/Discussion:
+Collab/Discussion: N/A
 
-Time spent:
+Time spent: 16 hours

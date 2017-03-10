@@ -15,16 +15,21 @@ var icons = {
         icon: 'black_car.png'
     },
     passengers: {
+	/* Src: https://commons.wikimedia.org/wiki/File:Collect_Apps_logo.png */
 	icon: 'squirrel.png'
+    },
+    me: {
+        icon: 'africa_pachyderm.png'
     }
 };
 
+
 function addMarkers(data, type) {
-    var mapmarker;
+    /* var mapmarker; */
     for (var i = 0; i < data[type].length; i++) {
         var Loc = new google.maps.LatLng(data[type][i].lat, data[type][i].lng);
 
-        mapmarker = new google.maps.Marker({
+        var mapmarker = new google.maps.Marker({
 	    position: Loc,
 	    icon: icons[type].icon,
 	    title: data[type][i].username
@@ -33,9 +38,9 @@ function addMarkers(data, type) {
 	mapmarker.setMap(map);
 
 	google.maps.event.addListener(mapmarker, 'click', function() {
-	    infowindow.setContent(mapmarker.title);
-	    infowindow.open(map, mapmarker);
-	});
+	    infowindow.setContent(this.title);
+	    infowindow.open(map, this);
+        });
     }
 }
 
@@ -84,6 +89,7 @@ function renderMap()
 	
     marker = new google.maps.Marker({
 	position: myLoc,
+	icon: icons['me'].icon,
 	title: "FACZaAp2"
     });
     
