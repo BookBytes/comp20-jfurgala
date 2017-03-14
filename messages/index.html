@@ -10,12 +10,13 @@
         function (newData) {
           console.log(newData);
           
-          $(newData).each(function(index) {
-	      	$("messages")
-	      	  .html("<p>" + newData[index]["content"] + " by " + newData[index]["username"] + "</p>")
-		  });
+          newMessages = "";
 
-	      // $("messages").html(newmessages);
+          $(newData).each(function(curr) { 
+          	newMessages += ("<p>" + $(newData)[curr]["content"] + " by " + $(newData)[curr]["username"] + "</p>");
+          });
+
+	      $("div#messages").html(newMessages);
 		}, "json")
 	});
   </script>
