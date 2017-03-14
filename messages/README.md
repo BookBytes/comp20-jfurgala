@@ -1,5 +1,7 @@
 Name: Juliana Furgala
 
-Time spent: 4 hours
+Time spent: 5 hours
 
-Status: Nearly complete...
+Status: Complete
+
+Collab: N/A
