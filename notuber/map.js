@@ -48,7 +48,6 @@ function addMarkers(data, type) {
 }
 
 function renderVehicles(data) {
-    console.log(data);
     if (data.vehicles) {
 	addMarkers(data, 'vehicles');
     }
@@ -58,7 +57,7 @@ function renderVehicles(data) {
 }
 
 function getMyLocation() {
-    req.open("POST", "https://defense-in-derpth.herokuapp.com/submit", true);
+    req.open("POST", "http://localhost:5000/submit", true); // "https://obscure-tundra-82992.herokuapp.com/submit", true);
     req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     if (navigator.geolocation) {
