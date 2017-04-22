@@ -1,0 +1,22 @@
+html {
+    background: #d0f8f0;
+    padding: 30px;
+}
+
+.boldme {
+	font-weight: bold;
+}
+
+.ital {
+	font-style: italic;
+}
+
+.code {
+	font-family: monospace;
+}
+
+img {
+	position: relative;
+	display: block;
+	margin: auto;
+}

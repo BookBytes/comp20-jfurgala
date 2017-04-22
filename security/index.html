@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+	<title>Security Evaluation</title>
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<link rel="stylesheet" href="style.css" type="text/css"/>
+</head>
+<body>
+    <h1>Not-Uber Security Evaluation</h1>
+	<p class="boldme">Introduction</p>
+	<p>The product being tested for security weaknesses is an Uber alternative web-app that allows passengers and drivers to connect. My task is to seek out the vulnerabilities in this application.</p>
+
+	<p class="boldme">Methodology</p>
+	<p>To uncover the security lapses in the Not-Uber app, I am using curl, BurpSuite, and Tamper Data.</p>
+
+	<p class="boldme">Abstract</p>
+	<p></p>
+
+	<p class="boldme">Issues Found</p>
+		<ul>
+			<li>
+				<p class="ital">First Issue:</p>
+				<ul>
+					<li>Issue</li>
+					<p>MongoDB Injection Vulnerability</p>
+
+					<li>Location/Page</li>
+					<p>vehicle.json path</p>
+
+					<li>Severity</li>
+					<p>High; this issue allows a potential hacker to steal all of the information stored in the database, including sensitive data and information about users.</p>
+
+					<li>Description</li>
+					<p>This problem can be activated by changing the URI in the browser from
+
+						<p class="code">https://infinite-savannah-11505.herokuapp.com/vehicle.json?username=</p>
+
+						to
+
+						<p class="code">https://infinite-savannah-11505.herokuapp.com/vehicle.json?username[$ne]=</p>
+
+						This change injects a MongoDB command into the server that causes all data stored, not just what is in the query string, to be returned.
+					</p>
+
+					<li>Proof</li>
+					<img src="img/mongoInjection.png" alt="MongoDB injection">
+					<p></p>
+
+					<li>Resolutions</li>
+					<p>Parse the query string to see that the key is a valid key, without any added MongoDB commands.</p>
+				</ul>
+			</li>
+
+			<li>
+				<p class="ital">Second Issue:</p>
+				<ul>
+					<li>Issue</li>
+					<p>XSS (through username field)</p>
+
+					<li>Location/Page</li>
+					<p>Sent JS window alert through submit path, manifests upon load of the index page</p>
+
+					<li>Severity</li>
+					<p>Medium; affects all visitors of the site at the index path but does not leak information stored in the Mongo database or information about the hosting server</p>
+
+					<li>Description</li>
+					<p>This hack can be committed by using the following terminal command to send data to the submit path:</p>
+					<img src="img/AlertHackTerminal.png" alt="Terminal command to initiate alert window hack">
+					<p>The message in the alert can be anything.</p>
+
+					<li>Proof</li>
+					<img src="img/AlertHack.png" alt="Alert Hack">
+					<img src="img/AlertHackAfter.png" alt="Screen After Dismissing Alert">
+					<p></p>
+
+					<li>Resolutions</li>
+					<p>Check the username value upon receiving for any code or script tags and eliminate them. Alternatively (easier but less adaptable) remove all special characters from any given username input.</p>
+				</ul>
+			</li>
+
+			<li>
+				<p class="ital">Third Issue:</p>
+				<ul>
+					<li>Issue</li>
+					<p></p>
+
+					<li>Location/Page</li>
+					<p></p>
+
+					<li>Severity</li>
+					<p></p>
+
+					<li>Description</li>
+					<p></p>
+
+					<li>Proof</li>
+					<img src="">
+					<p></p>
+
+					<li>Resolutions</li>
+					<p></p>
+				</ul>
+			</li>
+
+			<li>
+				<p class="ital">Fourth Issue:</p>
+				<ul>
+					<li>Issue</li>
+					<p></p>
+
+					<li>Location/Page</li>
+					<p></p>
+
+					<li>Severity</li>
+					<p></p>
+
+					<li>Description</li>
+					<p></p>
+
+					<li>Proof</li>
+					<img src="">
+					<p></p>
+
+					<li>Resolutions</li>
+					<p></p>
+				</ul>
+			</li>
+		</ul>
+
+	<p class="boldme">Conclusion</p>
+
+
+	<p class="boldme">References</p>
+
+	<p>Ideas - redirect user; add script to lat and lng</p>
+</body>
+</html>
