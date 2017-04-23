@@ -1,6 +1,3 @@
-## Name 
-Juliana
-
 ## Purpose
 To showcase what I have done and learned in Comp20
 
