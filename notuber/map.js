@@ -57,7 +57,7 @@ function renderVehicles(data) {
 }
 
 function getMyLocation() {
-    req.open("POST", "https://obscure-tundra-82992.herokuapp.com/submit", true);
+    req.open("POST", "https://infinite-savannah-11505.herokuapp.com/submit", true); // "https://obscure-tundra-82992.herokuapp.com/submit", true);
     req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     if (navigator.geolocation) {
