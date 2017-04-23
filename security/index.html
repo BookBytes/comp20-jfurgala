@@ -9,10 +9,10 @@
 <body>
     <h1>Not-Uber Security Evaluation</h1>
 	<p class="boldme">Introduction</p>
-	<p>The product being tested for security weaknesses is an Uber alternative web-app that allows passengers and drivers to connect. My task is to seek out the vulnerabilities in this application.</p>
+	<p>The product being tested for security weaknesses is an Uber alternative web-app that allows passengers and drivers to connect. There is a front end and a back end component to test. My task is to seek out the vulnerabilities in this application.</p>
 
 	<p class="boldme">Methodology</p>
-	<p>To uncover the security lapses in the Not-Uber app, I am using curl, BurpSuite, and Tamper Data.</p>
+	<p>To uncover the security lapses in the Not-Uber app, I am using curl and BurpSuite.</p>
 
 	<p class="boldme">Abstract</p>
 	<p></p>
@@ -66,21 +66,99 @@
 
 					<li>Description</li>
 					<p>This hack can be committed by using the following terminal command to send data to the submit path:</p>
-					<img src="img/AlertHackTerminal.png" alt="Terminal command to initiate alert window hack">
+					<img src="img/AlertHackTerminal.png" alt="Terminal command to initiate username field alert window hack">
 					<p>The message in the alert can be anything.</p>
 
 					<li>Proof</li>
-					<img src="img/AlertHack.png" alt="Alert Hack">
-					<img src="img/AlertHackAfter.png" alt="Screen After Dismissing Alert">
+					<img src="img/AlertHack.png" alt="Username alert hack">
+					<img src="img/AlertHackAfter.png" alt="Screen after dismissing alert">
 					<p></p>
 
 					<li>Resolutions</li>
-					<p>Check the username value upon receiving for any code or script tags and eliminate them. Alternatively (easier but less adaptable) remove all special characters from any given username input.</p>
+					<p>Check the username value upon receiving it for any code or script tags and eliminate them. Alternatively (easier but less adaptable) remove all special characters from any given username input. Another option is to refuse to store the data if any special characters or code are found.</p>
 				</ul>
 			</li>
 
 			<li>
 				<p class="ital">Third Issue:</p>
+				<ul>
+					<li>Issue</li>
+					<p>XSS (through latitude field)</p>
+
+					<li>Location/Page</li>
+					<p>Sent JS window alert through submit path, manifests upon load of the index page (if username is passenger) or load of vehicle.json path (if username is vehicle)</p>
+
+					<li>Severity</li>
+					<p>Medium; affects all visitors of the site at the index path but does not leak information stored in the Mongo database or information about the hosting server</p>
+
+					<li>Description</li>
+					<p>This hack can be committed by using the following terminal command to send data to the submit path:</p>
+					<img src="img/LatAlertHackTerminal.png" alt="Terminal command to initiate latitude field alert window hack">
+					<p>The message in the alert can be anything.</p>
+
+					<p>Another set of related sanitizing issues with the latitude field include not checking if the input is a number and if that number is within regular latitude range.</p>
+
+					<li>Proof</li>
+					<img src="img/LatAlertHack.png" alt="Latitude alert hack">
+					<img src="img/LatAlertHackAfter.png" alt="Screen after dismissing alert">
+
+					<p>Bad data form:</p>
+					<img src="img/LatStringValTerminal.png" alt="Terminal command to insert a string as a latitude">
+					<img src="img/LatStringVal.png" alt="Resulting page with invalid string latitude">
+					<p>Data above range of latitude:</p>
+					<img src="img/LatHighValTerminal.png" alt="Terminal command to insert a value above latitude range">
+					<img src="img/LatHighVal.png" alt="Resulting page with a latitude value above range">
+					<p>Data below range of latitude:</p>
+					<img src="img/LatLowValTerminal.png" alt="Terminal command to insert a value below latitude range">
+					<img src="img/LatLowVal.png" alt="Resulting page with a latitude value below range">
+					<p></p>
+
+					<li>Resolutions</li>
+					<p>Check the latitude value upon receiving it to ensure that it is a valid real (aka number) before storage. If it is not, return an error and simply refuse to store the data.</p>
+				</ul>
+			</li>
+
+			<li>
+				<p class="ital">Fourth Issue:</p>
+				<ul>
+					<li>Issue</li>
+					<p>XSS (through longitude field)</p>
+
+					<li>Location/Page</li>
+					<p>Sent JS window alert through submit path, manifests upon load of the index page (if username is passenger) or load of vehicle.json path (if username is vehicle)</p>
+
+					<li>Severity</li>
+					<p>Medium; affects all visitors of the site at the index path but does not leak information stored in the Mongo database or information about the hosting server</p>
+
+					<li>Description</li>
+					<p>This hack can be committed by using the following terminal command to send data to the submit path:</p>
+					<img src="img/LngAlertHackTerminal.png" alt="Terminal command to initiate longitude field alert window hack">
+					<p>The message in the alert can be anything.</p>
+
+					<p>Another set of related sanitizing issues with the longitude field include not checking if the input is a number and if that number is within regular longitude range.</p>
+
+					<li>Proof</li>
+					<img src="img/LngAlertHack.png" alt="Longitude alert hack">
+					<img src="img/LngAlertHackAfter.png" alt="Screen after dismissing alert">
+
+					<p>Bad data form:</p>
+					<img src="img/LngStringValTerminal.png" alt="Terminal command to insert a string as a longitude">
+					<img src="img/LngStringVal.png" alt="Resulting page with invalid string longitude">
+					<p>Data above range of longitude:</p>
+					<img src="img/LngHighValTerminal.png" alt="Terminal command to insert a value above longitude range">
+					<img src="img/LngHighVal.png" alt="Resulting page with a longitude value above range">
+					<p>Data below range of longitude:</p>
+					<img src="img/LngLowValTerminal.png" alt="Terminal command to insert a value below longitude range">
+					<img src="img/LngLowVal.png" alt="Resulting page with a longitude value below range">
+					<p></p>
+
+					<li>Resolutions</li>
+					<p>Check the longitude value upon receiving it to ensure that it is a valid real (aka number) before storage. If it is not, return an error and simply refuse to store the data.</p>
+				</ul>
+			</li>
+
+			<li>
+				<p class="ital">Fifth Issue:</p>
 				<ul>
 					<li>Issue</li>
 					<p></p>
@@ -104,7 +182,7 @@
 			</li>
 
 			<li>
-				<p class="ital">Fourth Issue:</p>
+				<p class="ital">Sixth Issue:</p>
 				<ul>
 					<li>Issue</li>
 					<p></p>
@@ -133,6 +211,6 @@
 
 	<p class="boldme">References</p>
 
-	<p>Ideas - redirect user; add script to lat and lng</p>
+	<p>Ideas - redirect user; use invalid lat and lngs, send extra param in submit, send less params in submit, change css, inject image/content</p>
 </body>
 </html>
