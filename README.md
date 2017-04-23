@@ -28,4 +28,4 @@ https://github.com/tuftsdev/comp20-jfurgala/tree/master/security
 
 ##Future exploration
 
-I would like to explore more about the security vulnerabilities in many web apps and the implications that the sad state of most websites lacking proper security has on Internet use. Even seeing what we went over on a basic level in class, I felt surprised and am definitely more wary of trusting websites with information.
+I would like to explore more about the security vulnerabilities in many web apps and the implications that the sad state of most websites lacking proper security has on Internet use. Even seeing what we went over on a basic level in class, I was surprised and am definitely more wary of trusting websites with information (I already operated under the assumption that nothing was really private).
