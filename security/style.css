@@ -4,19 +4,19 @@ html {
 }
 
 .boldme {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 .ital {
-	font-style: italic;
+    font-style: italic;
 }
 
 .code {
-	font-family: monospace;
+    font-family: monospace;
 }
 
 img {
-	position: relative;
-	display: block;
-	margin: auto;
+    position: relative;
+    display: block;
+    margin: auto;
 }

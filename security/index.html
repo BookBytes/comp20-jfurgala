@@ -12,10 +12,10 @@
 	<p>The product being tested for security weaknesses is an Uber alternative web-app that allows passengers and drivers to connect. There is a front end and a back end component to test. My task is to seek out the vulnerabilities in this application.</p>
 
 	<p class="boldme">Methodology</p>
-	<p>To uncover the security lapses in the Not-Uber app, I am using curl and BurpSuite.</p>
+	<p>To uncover the security lapses in the Not-Uber app, I am using curl and Tamper Data for Firefox.</p>
 
 	<p class="boldme">Abstract</p>
-	<p></p>
+	<p>I identified security issues related to being able to harvest more information from the web app than should be accessible and inject potentially harmful code into the web app that will cause the web app to function abnormally or stop working entirely.</p>
 
 	<p class="boldme">Issues Found</p>
 		<ul>
@@ -83,7 +83,7 @@
 				<p class="ital">Third Issue:</p>
 				<ul>
 					<li>Issue</li>
-					<p>XSS (through latitude field)</p>
+					<p>XSS (through latitude field) / Not checking for valid integer latitude values</p>
 
 					<li>Location/Page</li>
 					<p>Sent JS window alert through submit path, manifests upon load of the index page (if username is passenger) or load of vehicle.json path (if username is vehicle)</p>
@@ -122,7 +122,7 @@
 				<p class="ital">Fourth Issue:</p>
 				<ul>
 					<li>Issue</li>
-					<p>XSS (through longitude field)</p>
+					<p>XSS (through longitude field) / Not checking for valid integer longitude values</p>
 
 					<li>Location/Page</li>
 					<p>Sent JS window alert through submit path, manifests upon load of the index page (if username is passenger) or load of vehicle.json path (if username is vehicle)</p>
@@ -161,23 +161,28 @@
 				<p class="ital">Fifth Issue:</p>
 				<ul>
 					<li>Issue</li>
-					<p></p>
+					<p>XSS to cause infinite loop to prevent page load</p>
 
 					<li>Location/Page</li>
-					<p></p>
+					<p>Sent JS script through submit path, manifests upon load of the index page (if username is passenger) or load of vehicle.json path (if username is vehicle)</p>
 
 					<li>Severity</li>
-					<p></p>
+					<p>High; affects all visitors of the site at the index path and vehicle.json path (depending on if input was passenger or vehicle) rendering the website useless</p>
 
 					<li>Description</li>
-					<p></p>
+					<p>This hack can be committed by using the following terminal command to send data to the submit path:</p>
+					<img src="img/InfiniteLoadingLoopTerminal.png" alt="Terminal command to initiate infinite loading loop">
+					<p>The redirect can be to any page that won't load or that won't respond to a redirect to cause infinite loading.</p>
 
 					<li>Proof</li>
-					<img src="">
+					<p>Picture of infinite loading...</p>
+					<img src="img/InfiniteLoadingLoop.png" alt="Infinite loading loop">
+					<p>Loop after it was cancelled 20+ seconds (It never actually loads.)</p>
+					<img src="img/InfiniteLoopCancel.png" alt="Cancelled loading loop"
 					<p></p>
 
 					<li>Resolutions</li>
-					<p></p>
+					<p>Check all input fields for script tags and remove any JS code found or alternatively, refuse to store any data with script in it.</p>
 				</ul>
 			</li>
 
@@ -210,7 +215,8 @@
 
 
 	<p class="boldme">References</p>
+	<p>Injection source: https://joeygrover.com/2013/09/11/code-injection-website-hacking-steroids/</p>
 
-	<p>Ideas - redirect user; send extra param in submit, send less params in submit, change css, inject image/content; add infinite recursion loop that prevents page from loading; refirect page upon load; add image to page; store image in db; asst 2 side</p>
+	<p>Ideas - change css, inject image/content; redirect page upon load; asst 2 side; " " as username</p>
 </body>
 </html>
