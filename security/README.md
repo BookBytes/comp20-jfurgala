@@ -1,7 +1,10 @@
-README
+# README
 
-Status: Assignment completed as in spec.
+## Status:
+Assignment completed as in spec.
 
-Collab: N/A
+## Collab:
+N/A
 
-Time Spent: 11 hours
+## Time Spent:
+11 hours
