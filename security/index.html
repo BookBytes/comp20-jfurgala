@@ -115,7 +115,7 @@
 					<p></p>
 
 					<li>Resolutions</li>
-					<p>Check the latitude value upon receiving it to ensure that it is a valid real (aka number) before storage. If it is not, return an error and simply refuse to store the data.</p>
+					<p>Check the latitude value upon receiving it to ensure that it is a valid real (aka number) before storage. If it is not, return an error and simply refuse to store the data. An invalid latitude will not show up on Google maps.</p>
 				</ul>
 			</li>
 
@@ -136,7 +136,7 @@
 					<img src="img/LngAlertHackTerminal.png" alt="Terminal command to initiate longitude field alert window hack">
 					<p>The message in the alert can be anything.</p>
 
-					<p>Another set of related sanitizing issues with the longitude field include not checking if the input is a number and if that number is within regular longitude range.</p>
+					<p>Another set of related sanitizing issues with the longitude field include not checking if the input is a number and if that number is within regular longitude range. An invalid longitude will not show up on Google maps.</p>
 
 					<li>Proof</li>
 					<img src="img/LngAlertHack.png" alt="Longitude alert hack">
