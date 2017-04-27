@@ -19,6 +19,7 @@
 
 	<p class="boldme">Issues Found</p>
 		<ul>
+			<li>The third and fourth issues are related to each other and to issue two but have enough variations and are distinct in some ways so I marked them as separate.</li>
 			<li>
 				<p class="ital">First Issue:</p>
 				<ul>
@@ -190,33 +191,70 @@
 				<p class="ital">Sixth Issue:</p>
 				<ul>
 					<li>Issue</li>
-					<p></p>
+					<p>XSS to cause redirect to potentially malicious websites</p>
 
 					<li>Location/Page</li>
-					<p></p>
+					<p>Sent JS script through submit path, manifests upon load of the index page (if username is passenger) or load of vehicle.json path (if username is vehicle)</p>
 
 					<li>Severity</li>
-					<p></p>
+					<p>High; affects all visitors of the site at the index path and vehicle.json path (depending on if input was passenger or vehicle) using the website as a pawn and stepping stone</p>
 
 					<li>Description</li>
-					<p></p>
+					<p>This hack can be committed by using the following terminal command to send data to the submit path:</p>
+					<img src="img/RedirectTerminal.png" alt="Terminal command to redirect page">
+					<p>The redirect can be to any page or content the hacker wants to redirect to.</p>
 
 					<li>Proof</li>
-					<img src="">
+					<p>Page after redirection (with terminal message to show the page redirect)</p>
+					<img src="img/RedirectAfter.png" alt="Screen after page redirect">
 					<p></p>
 
 					<li>Resolutions</li>
-					<p></p>
+					<p>Check all input fields for script tags and remove any JS code found or alternatively, refuse to store any data with script in it.</p>
 				</ul>
+			</li>
+
+			<li>
+				<p class="ital">Seventh Issue:</p>
+				<ul>
+					<li>Issue</li>
+					<p>XSS to change the website's CSS</p>
+
+					<li>Location/Page</li>
+					<p>Sent JS script through submit path, manifests upon load of the index page (if username is passenger) or load of vehicle.json path (if username is vehicle)</p>
+
+					<li>Severity</li>
+					<p>Low; affects all visitors of the site at the index path and vehicle.json path (depending on if input was passenger or vehicle) but only does cosmetic damage, not steal information</p>
+
+					<li>Description</li>
+					<p>This hack can be committed by using the following terminal command to send data to the submit path:</p>
+					<img src="img/CSStamperingTerminal.png" alt="Terminal command to change page's CSS">
+					<p>The change to CSS could be anything formatting related.</p>
+
+					<li>Proof</li>
+					<p>Page after CSS change</p>
+					<img src="img/CSStampering.png" alt="Screen after CSS tampering">
+					<p></p>
+
+					<li>Resolutions</li>
+					<p>Check all input fields for script tags and remove any JS code found or alternatively, refuse to store any data with script in it.</p>
+				</ul>
+			</li>
+
+			<li>
+				<p class="ital">Misc.</p>
+				<p>Miscellaneous issues that I caused (terminal error messages) and input that prevented the strings/sentences on the index path from rendering/rendering correctly.</p>
+				<img src="img/Misc.png" alt="Miscellaneous hacks/problems">
 			</li>
 		</ul>
 
 	<p class="boldme">Conclusion</p>
-
+	<p>This web app has a number of security vulnerabilities, many relating to XSS openings that allow users to inject bad code and content into the web app. As the number of users increases, the chance that the site will become a target for people of ill will increases too. Shore up all areas that require user input by checking for script tags and JS code and eliminate the need for manual user input where possible. Cost for continued services to fix these security and privacy issues is $100 per vulnerability.</p>
 
 	<p class="boldme">References</p>
 	<p>Injection source: https://joeygrover.com/2013/09/11/code-injection-website-hacking-steroids/</p>
-
-	<p>Ideas - change css, inject image/content; redirect page upon load; asst 2 side; " " as username</p>
+	<p>Page redirection methods: https://css-tricks.com/redirect-web-page/</p>
+	<p>Internal CSS example from: https://www.w3schools.com/html/html_css.asp</p>
+	<p>General security vulnerabilities: https://developer.apple.com/library/content/documentation/Security/Conceptual/SecureCodingGuide/Articles/TypesSecVuln.html</p>
 </body>
 </html>
